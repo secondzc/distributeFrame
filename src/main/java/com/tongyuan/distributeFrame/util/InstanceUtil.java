@@ -3,6 +3,7 @@ package com.tongyuan.distributeFrame.util;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashSet;
 
 /**
  * Created by zhangcy on 2018/2/13
@@ -31,5 +32,12 @@ public class InstanceUtil {
             e.printStackTrace();
         }
         return result;
+    }
+
+    /**
+     * Constructs an empty HashSet.
+     */
+    public static final <E> HashSet<E> newHashSet() {
+        return new HashSet<E>();
     }
 }

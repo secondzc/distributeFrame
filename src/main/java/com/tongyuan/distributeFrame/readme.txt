@@ -1,0 +1,2 @@
+用户使用本框架时可以配置的项目：
+redis.expiration
