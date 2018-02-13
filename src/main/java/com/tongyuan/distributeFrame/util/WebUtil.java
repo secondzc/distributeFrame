@@ -1,8 +1,8 @@
 package com.tongyuan.distributeFrame.util;
 
 import com.tongyuan.distributeFrame.constant.Constants;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.InvalidSessionException;
 import org.apache.shiro.session.Session;
