@@ -1,6 +1,7 @@
 package com.tongyuan.distributeFrame.cache;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -58,4 +59,14 @@ public interface CacheManager {
     Set<?> sall(String key);
 
     boolean sdel(String key, Serializable value);
+
+    /*
+    对list的操作
+     */
+    void laddAll(String key,List<?> value);
+
+    List<?> lgetrange(String key, long startOffset, long endOffset);
+
+    List<?> lgetAll(String key);
+
 }

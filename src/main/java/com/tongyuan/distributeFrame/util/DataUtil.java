@@ -42,4 +42,8 @@ public class DataUtil {
         }
         return true;
     }
+
+    public static final boolean isEmpty(Object pObj){
+        return !isNotEmpty(pObj);
+    }
 }

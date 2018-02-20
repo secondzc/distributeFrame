@@ -21,7 +21,7 @@ public class GlobalExcpetionHandler {
     public Map<String,Object> exceptionHandler(Exception ex)
             throws Exception {
         logger.error(Constants.EXCPETION_HEAD, ex);
-        Map<String,Object> map = new HashMap<>();
+        Map<String,Object> map = new HashMap<String,Object>();
         if (ex instanceof BaseException) {
             ((BaseException) ex).handler(map);
         }else{

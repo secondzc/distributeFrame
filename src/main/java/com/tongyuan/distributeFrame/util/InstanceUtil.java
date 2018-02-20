@@ -3,6 +3,7 @@ package com.tongyuan.distributeFrame.util;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.HashSet;
 
 /**
@@ -39,5 +40,12 @@ public class InstanceUtil {
      */
     public static final <E> HashSet<E> newHashSet() {
         return new HashSet<E>();
+    }
+
+    /**
+     * Constructs an empty HashMap.
+     */
+    public static final <k, v> HashMap<k, v> newHashMap() {
+        return new HashMap<k, v>();
     }
 }

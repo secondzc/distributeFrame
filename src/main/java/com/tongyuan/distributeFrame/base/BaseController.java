@@ -1,9 +1,11 @@
 package com.tongyuan.distributeFrame.base;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.github.pagehelper.PageInfo;
 import com.tongyuan.distributeFrame.constant.Constants;
 import com.tongyuan.distributeFrame.exception.BaseException;
 import com.tongyuan.distributeFrame.exception.IllegalParameterException;
+import com.tongyuan.distributeFrame.util.HttpUtil;
 import com.tongyuan.distributeFrame.util.WebUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,7 +29,7 @@ public class BaseController {
     }
 
     protected Map<String,Object> setResponse(Object result){
-        Map<String,Object> map = new HashMap<>();
+        Map<String,Object> map = new HashMap<String,Object>();
         if(result instanceof List<?>){
             map.put("total",((List<?>) result).size());
             map.put("rows",result);
@@ -47,6 +49,25 @@ public class BaseController {
             map.put("data",result);
         }
         return map;
+    }
+
+    protected String getPara(String name) {
+        return HttpUtil.getRequest().getParameter(name);
+    }
+
+    /**
+     * pageNum 页数
+     * numPerPage 每页显示的数目
+     */
+    protected  Page getPage() {
+        int _numPerPage = 20, _pageNum = 1;
+        if (getPara("pageNum") != null) {
+            _pageNum = Integer.parseInt(getPara("pageNum"));
+        }
+        if (getPara("numPerPage") != null) {
+            _numPerPage = Integer.parseInt(getPara("numPerPage"));
+        }
+        return new Page(_pageNum, _numPerPage);
     }
 }
 

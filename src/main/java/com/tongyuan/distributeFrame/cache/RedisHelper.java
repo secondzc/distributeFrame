@@ -2,9 +2,11 @@ package com.tongyuan.distributeFrame.cache;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import com.tongyuan.distributeFrame.util.DataUtil;
 import com.tongyuan.distributeFrame.util.InstanceUtil;
 import com.tongyuan.distributeFrame.util.PropertiesUtil;
 import org.apache.logging.log4j.LogManager;
@@ -121,6 +123,9 @@ public final class RedisHelper implements CacheManager {
         return redisTemplate.boundValueOps(key).get(startOffset, endOffset);
     }
 
+    /*
+    将给定 key 的值设为 value ，并返回 key 的旧值(old value)。
+     */
     @Override
     public final Object getSet(final String key, final Serializable value) {
         expire(key, EXPIRE);
@@ -144,6 +149,9 @@ public final class RedisHelper implements CacheManager {
         }
     }
 
+    /*
+        加锁原理：用一个状态值表示锁，对锁的占用和释放通过状态值来标识。
+     */
     @Override
     public boolean lock(String key) {
         RedisConnectionFactory factory = redisTemplate.getConnectionFactory();
@@ -192,6 +200,27 @@ public final class RedisHelper implements CacheManager {
     @Override
     public boolean sdel(String key, Serializable value) {
         return redisTemplate.boundSetOps(key).remove(value) == 1;
+    }
+
+    @Override
+    public void laddAll(String key, List<?> value) {
+        if(DataUtil.isNotEmpty(value)){
+            for(int i=0;i<value.size();i++){
+                Serializable v = (Serializable) value.get(i);
+                redisTemplate.boundListOps(key).rightPushAll(v);
+            }
+        }
+    }
+
+    @Override
+    public List<?> lgetrange(String key, long startOffset, long endOffset) {
+        return redisTemplate.boundListOps(key).range(startOffset,endOffset);
+    }
+
+    @Override
+    public List<?> lgetAll(String key) {
+        long size = redisTemplate.boundListOps(key).size();
+        return redisTemplate.boundListOps(key).range(0,size);
     }
 
     @Override
