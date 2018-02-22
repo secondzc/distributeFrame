@@ -5,10 +5,9 @@ package com.tongyuan.distributeFrame.base;
  */
 public interface BaseService<T extends BaseModel> {
     void del(Long id);
-    String getCacheKey();
     String getCacheKey(Object id);
     String getLockKey(Object id);
     T queryById(Long id);
-    T update(T record);
-    String test1();
+    T queryByIdCache(Long id);
+    Boolean updateById(T record);
 }

@@ -19,11 +19,5 @@ public class UserServiceImplTest {
     @Autowired
     private UserService userService;
 
-    @Test
-    public void test1(){
-        String str = userService.test1();
-        System.out.println(str);
-        assertEquals(str,"zhang");
-    }
 
 }

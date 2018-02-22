@@ -1,4 +1,4 @@
-package com.tongyuan.testmp1.config;
+package com.tongyuan.distributeFrame.demo.config;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.mybatis.spring.annotation.MapperScan;

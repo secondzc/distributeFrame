@@ -1,7 +1,7 @@
-package com.tongyuan.testmp1.dao;
+package com.tongyuan.distributeFrame.demo.dao;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.tongyuan.testmp1.entity.User;
+import com.tongyuan.distributeFrame.demo.entity.User;
 
 /**
  * Created by zhangcy on 2018/2/15

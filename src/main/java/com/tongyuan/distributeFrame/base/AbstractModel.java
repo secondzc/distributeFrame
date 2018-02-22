@@ -8,18 +8,9 @@ import java.util.Date;
  * BaseModel是更抽象的类，AbstractModel则提供了更多的属性，使用时可以根据需要选择继承BaseModel类或者继承AbstractModel类
  */
 public class AbstractModel extends BaseModel{
-    private Long id;
     private Boolean isDel;
     private Date createTime;
     private Date updateTime;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Boolean getDel() {
         return isDel;

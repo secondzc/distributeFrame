@@ -1,8 +1,8 @@
-package com.tongyuan.testmp1.entity;
+package com.tongyuan.distributeFrame.demo.entity;
 
-import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.tongyuan.distributeFrame.base.BaseModel;
 
 import java.io.Serializable;
 
@@ -10,7 +10,7 @@ import java.io.Serializable;
  * Created by zhangcy on 2018/2/15
  */
 @TableName("user")
-public class User implements Serializable {
+public class User extends BaseModel{
     private Long id;
     private String age;
     private String username;
@@ -47,5 +47,15 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", age='" + age + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
