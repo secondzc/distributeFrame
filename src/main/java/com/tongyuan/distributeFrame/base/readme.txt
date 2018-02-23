@@ -4,3 +4,5 @@
 感觉它过度抽象了，而我这个项目重点是BaseService对缓存的操作和对分页的支持，简化return操作。因此考虑删除Provider和Parameter
 
 经过测试，@RequestBody适用于application/json,如果前端json的键和service层要求的键一致不需要转化的话，能很大地减少controller层的工作量。
+
+ibase4j中，应该是common和两个facade是每台服务器都有的，然后web和service共有4个，分别部署在四台服务器（集群）中。
