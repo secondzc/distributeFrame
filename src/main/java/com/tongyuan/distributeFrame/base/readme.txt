@@ -1,0 +1,4 @@
+在ibase4j的项目中，因为想要抽象Controller，所以有AbstractController的存在，需要@Autowired注入不同的Service，
+而这时service的名字又不知道，所以就写了一个getService()的回调方法，组合成（方法名、参数）的形式来执行。
+
+感觉它过度抽象了，而我这个项目重点是BaseService对缓存的操作和对分页的支持，简化return操作。因此考虑删除Provider和Parameter

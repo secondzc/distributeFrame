@@ -13,7 +13,7 @@ import java.beans.PropertyVetoException;
  * ssm和springboot就是封装了各类配置的spring框架
  */
 @Configuration
-@MapperScan("com.tongyuan.wechat")
+@MapperScan("com.tongyuan.distributeFrame.demo.dao")
 public class DataSourceConfiguration {
     @Value("${jdbc.driver}")
     private String jdbcDriver;

@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.List;
@@ -40,11 +41,11 @@ public class BaseController {
             //结果集
             map.put("rows",pageInfo.getList());
             //每页的数量
-            map.put("pageSize",pageInfo.getPageSize());
+            map.put("pageSize",pageInfo.getSize());
             //总页数
             map.put("pages",pageInfo.getPages());
             //当前页的目录
-            map.put("pageNum",pageInfo.getPageNum());
+            map.put("current",pageInfo.getPageNum());
         }else{
             map.put("data",result);
         }
@@ -53,21 +54,6 @@ public class BaseController {
 
     protected String getPara(String name) {
         return HttpUtil.getRequest().getParameter(name);
-    }
-
-    /**
-     * pageNum 页数
-     * numPerPage 每页显示的数目
-     */
-    protected  Page getPage() {
-        int _numPerPage = 20, _pageNum = 1;
-        if (getPara("pageNum") != null) {
-            _pageNum = Integer.parseInt(getPara("pageNum"));
-        }
-        if (getPara("numPerPage") != null) {
-            _numPerPage = Integer.parseInt(getPara("numPerPage"));
-        }
-        return new Page(_pageNum, _numPerPage);
     }
 }
 

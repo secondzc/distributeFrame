@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.tongyuan.wechat.dao.OrderDetailDao">
+<mapper namespace="com.tongyuan.distributeFrame.demo.dao.UserMapper">
+    <resultMap id="baseResultMap" type="com.tongyuan.distributeFrame.demo.entity.User">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="age" property="age" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="queryByName" resultMap="baseResultMap" parameterType="java.util.Map">
+        SELECT id,username,age
+        FROM user
+        WHERE username LIKE concat(#{str,jdbcType=VARCHAR},'%');
+    </select>
+
 </mapper>

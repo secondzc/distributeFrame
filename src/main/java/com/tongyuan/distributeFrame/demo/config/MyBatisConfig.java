@@ -5,17 +5,20 @@ import com.baomidou.mybatisplus.MybatisXMLLanguageDriver;
 import com.baomidou.mybatisplus.entity.GlobalConfiguration;
 import com.baomidou.mybatisplus.mapper.LogicSqlInjector;
 import com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean;
+import com.github.pagehelper.PageHelper;
+import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.JdbcType;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan({"com.tongyuan.distributeFrame.demo.dao","com.tongyuan.distributeFrame.base"})
+@MapperScan("com.tongyuan.distributeFrame.demo.dao")
 public class MyBatisConfig {
 
 	@Bean("mybatisSqlSession")
@@ -33,6 +36,7 @@ public class MyBatisConfig {
 //				new OptimisticLockerInterceptor()
 //		});
 		sqlSessionFactory.setGlobalConfig(globalConfiguration);
+		sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:com/tongyuan/distributeFrame/demo/dao/xml/*.xml"));
 		return sqlSessionFactory.getObject();
 	}
 

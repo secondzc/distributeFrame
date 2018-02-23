@@ -1,9 +1,9 @@
 package com.tongyuan.distributeFrame.base;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.github.pagehelper.PageInfo;
 import com.tongyuan.distributeFrame.constant.Constants;
-import com.tongyuan.distributeFrame.demo.entity.User;
-import com.tongyuan.distributeFrame.exception.LockException;
 import com.tongyuan.distributeFrame.util.CacheUtil;
 import com.tongyuan.distributeFrame.util.DataUtil;
 import org.apache.commons.lang3.ArrayUtils;
@@ -12,10 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by zhangcy on 2018/2/12

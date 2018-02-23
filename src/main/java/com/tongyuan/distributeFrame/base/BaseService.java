@@ -1,5 +1,11 @@
 package com.tongyuan.distributeFrame.base;
 
+import com.baomidou.mybatisplus.plugins.Page;
+import com.github.pagehelper.PageInfo;
+
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by zhangcy on 2018/2/20
  */
