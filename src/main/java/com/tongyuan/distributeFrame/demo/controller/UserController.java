@@ -25,15 +25,8 @@ public class UserController extends BaseController{
      */
     @PostMapping("/query")
     @ResponseBody
-    public Map<String,Object> queryPage(@RequestParam("current") Long current,
-                                @RequestParam("pageSize") Long pageSize,
-                                @RequestParam("str") String str){
-        Map<String,Object> map = InstanceUtil.newHashMap();
-        map.put("current",current);
-        map.put("pageSize",pageSize);
-//        map.put("orderBy","username");
-        map.put("str",str);
-        PageInfo<User> pageInfo = userService.queryUserPageByName(map);
+    public Map<String,Object> queryPage(@RequestBody Map<String,Object> param){
+        PageInfo<User> pageInfo = userService.queryUserPageByName(param);
         return setResponse(pageInfo);
     }
 }

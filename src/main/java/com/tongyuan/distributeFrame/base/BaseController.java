@@ -55,5 +55,20 @@ public class BaseController {
     protected String getPara(String name) {
         return HttpUtil.getRequest().getParameter(name);
     }
+
+    /**
+     * @param param  前端传入的@RequestBody
+     * @param mappingRule  前后端不一致的键的映射表(key=前端，value=后端）
+     * @return  传给service层的map
+     */
+    public Map<String,Object> wrap(Map<String,Object> param,Map<String,String> mappingRule){
+        for(Map.Entry<String,String> rule:mappingRule.entrySet()){
+            String front = rule.getKey();
+            String back = rule.getValue();
+            Object data = param.get(front);
+            param.put(back,data);
+        }
+        return param;
+    }
 }
 

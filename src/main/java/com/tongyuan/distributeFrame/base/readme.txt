@@ -2,3 +2,5 @@
 而这时service的名字又不知道，所以就写了一个getService()的回调方法，组合成（方法名、参数）的形式来执行。
 
 感觉它过度抽象了，而我这个项目重点是BaseService对缓存的操作和对分页的支持，简化return操作。因此考虑删除Provider和Parameter
+
+经过测试，@RequestBody适用于application/json,如果前端json的键和service层要求的键一致不需要转化的话，能很大地减少controller层的工作量。
