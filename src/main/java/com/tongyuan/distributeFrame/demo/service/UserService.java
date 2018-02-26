@@ -14,4 +14,6 @@ import java.util.Map;
  */
 public interface UserService extends BaseService<User> {
     PageInfo<User> queryUserPageByName(Map<String,Object> map);
+    Long insert(User user);
+    User queryByUsername(String username);
 }

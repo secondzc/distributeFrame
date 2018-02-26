@@ -11,18 +11,29 @@ import java.io.Serializable;
  */
 @TableName("user")
 public class User extends BaseModel{
-    private Long id;
     private String age;
     private String username;
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @TableField(exist = false)
     private String email;
 
-    public Long getId() {
-        return id;
+
+    public User(String age, String username,  String password) {
+        this.age = age;
+        this.username = username;
+        this.password = password;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public User() {
     }
 
     public String getAge() {
@@ -52,10 +63,10 @@ public class User extends BaseModel{
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", age='" + age + '\'' +
+                "age='" + age + '\'' +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

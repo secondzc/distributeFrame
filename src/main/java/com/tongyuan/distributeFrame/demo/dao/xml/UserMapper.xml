@@ -5,12 +5,32 @@
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="username" property="username" jdbcType="VARCHAR"/>
         <result column="age" property="age" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <sql id="baseColumnList">
+        id,username,age,password
+    </sql>
+
     <select id="queryByName" resultMap="baseResultMap" parameterType="java.util.Map">
-        SELECT id,username,age
+        SELECT
+        <include refid="baseColumnList"/>
         FROM user
         WHERE username LIKE concat(#{str,jdbcType=VARCHAR},'%');
+    </select>
+
+    <!--<insert id="add" parameterType="com.tongyuan.distributeFrame.demo.entity.User" useGeneratedKeys="true" keyProperty="id">-->
+        <!--INSERT INTO user-->
+        <!--(age,username,password)-->
+        <!--VALUES-->
+        <!--(#{age},#{username},#{password})-->
+    <!--</insert>-->
+
+    <select id="queryByUsername" resultMap="baseResultMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="baseColumnList"/>
+        FROM user
+        WHERE username = #{username}
     </select>
 
 </mapper>

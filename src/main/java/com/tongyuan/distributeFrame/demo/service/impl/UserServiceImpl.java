@@ -8,6 +8,8 @@ import com.tongyuan.distributeFrame.base.PageProcess;
 import com.tongyuan.distributeFrame.demo.dao.UserMapper;
 import com.tongyuan.distributeFrame.demo.entity.User;
 import com.tongyuan.distributeFrame.demo.service.UserService;
+import com.tongyuan.distributeFrame.exception.DuplicateNameException;
+import com.tongyuan.distributeFrame.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,27 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
                 return userMapper.queryByName(map);
             }
         }.getPageInfo(map);
+    }
+
+    /*
+    若注册名称重复，则抛异常
+    返回主键
+     */
+    @Override
+    public Long insert(User user) {
+        String username = user.getUsername();
+        User queryUser = queryByUsername(username);
+        if(queryUser != null){
+            throw new DuplicateNameException("已存在同名用户！");
+        }else {
+            userMapper.insert(user);
+            return user.getId();
+        }
+    }
+
+    @Override
+    public User queryByUsername(String username) {
+        return userMapper.queryByUsername(username);
     }
 
 }

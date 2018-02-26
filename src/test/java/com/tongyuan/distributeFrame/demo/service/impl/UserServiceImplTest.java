@@ -1,5 +1,6 @@
 package com.tongyuan.distributeFrame.demo.service.impl;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.tongyuan.distributeFrame.demo.entity.User;
 import com.tongyuan.distributeFrame.demo.service.UserService;
 import org.junit.Test;
@@ -18,6 +19,14 @@ import static org.junit.Assert.*;
 public class UserServiceImplTest {
     @Autowired
     private UserService userService;
+    @Autowired
+    private BaseMapper baseMapper;
 
+    @Test
+    public void test1(){
+        User user = new User("44","zcy1","123root");
+        Long i = userService.insert(user);
+        System.out.println(i);
+    }
 
 }

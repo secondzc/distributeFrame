@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tongyuan.distributeFrame.demo.dao.UserExterdMapper">
+
+    <select id="getRoles" resultType="java.lang.String">
+        SELECT r.role_name
+        FROM user AS u
+        LEFT JOIN user_role AS ur
+        ON u.id = ur.user_id
+        LEFT JOIN role AS r
+        ON ur.role_id = r.id
+        WHERE u.user_name = #{username,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getPermissions">
+        SELECT DISTINCT p.permission_name
+        FROM user AS u
+        LEFT JOIN user_role AS ur
+        ON u.id = ur.user_id
+        LEFT JOIN role AS r
+        ON ur.role_id = r.id
+        LEFT JOIN role_permission AS rp
+        ON rp.role_id = r.id
+        LEFT JOIN permission AS p
+        ON rp.permission_id = p.id
+        WHERE u.user_name = #{username,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

@@ -6,6 +6,7 @@ import com.tongyuan.distributeFrame.constant.Constants;
 import com.tongyuan.distributeFrame.exception.BaseException;
 import com.tongyuan.distributeFrame.exception.IllegalParameterException;
 import com.tongyuan.distributeFrame.util.HttpUtil;
+import com.tongyuan.distributeFrame.util.InstanceUtil;
 import com.tongyuan.distributeFrame.util.WebUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,8 +30,8 @@ public class BaseController {
         return WebUtil.getCurrentUser();
     }
 
-    protected Map<String,Object> setResponse(Object result){
-        Map<String,Object> map = new HashMap<String,Object>();
+    protected Map<String,Object> setSuccessResponse(Object result){
+        Map<String,Object> map = new InstanceUtil().newHashMap();
         if(result instanceof List<?>){
             map.put("total",((List<?>) result).size());
             map.put("rows",result);
@@ -49,6 +50,38 @@ public class BaseController {
         }else{
             map.put("data",result);
         }
+        map.put("code",200);
+        map.put("flag",true);
+        return map;
+    }
+
+    protected Map<String,Object> setErrorResponse(Integer code,String msg){
+        Map<String,Object> map = new InstanceUtil().newHashMap();
+        map.put("code",code);
+        map.put("errMsg",msg);
+        return map;
+    }
+
+    protected Map<String,Object> setErrorResponse(String msg){
+        Map<String,Object> map = new InstanceUtil().newHashMap();
+        map.put("code",200);
+        map.put("errMsg",msg);
+        return map;
+    }
+
+    protected Map<String,Object> setErrorResponse(Integer code,Throwable throwable){
+        Map<String,Object> map = new InstanceUtil().newHashMap();
+        map.put("code",code);
+        map.put("flag",false);
+        map.put("errMsg",throwable.getMessage());
+        return map;
+    }
+
+    protected Map<String,Object> setErrorResponse(Throwable throwable){
+        Map<String,Object> map = new InstanceUtil().newHashMap();
+        map.put("code",200);
+        map.put("flag",false);
+        map.put("errMsg",throwable.getMessage());
         return map;
     }
 

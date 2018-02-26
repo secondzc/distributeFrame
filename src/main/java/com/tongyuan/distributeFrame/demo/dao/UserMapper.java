@@ -11,4 +11,5 @@ import java.util.Map;
  */
 public interface UserMapper extends BaseMapper<User> {
     List<User> queryByName(Map<String,Object> map);
+    User queryByUsername(String username);
 }
