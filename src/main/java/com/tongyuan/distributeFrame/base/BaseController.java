@@ -59,6 +59,7 @@ public class BaseController {
         Map<String,Object> map = new InstanceUtil().newHashMap();
         map.put("code",code);
         map.put("errMsg",msg);
+        map.put("flag",false);
         return map;
     }
 
@@ -66,6 +67,7 @@ public class BaseController {
         Map<String,Object> map = new InstanceUtil().newHashMap();
         map.put("code",200);
         map.put("errMsg",msg);
+        map.put("flag",false);
         return map;
     }
 

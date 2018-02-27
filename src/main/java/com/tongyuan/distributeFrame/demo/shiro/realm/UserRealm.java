@@ -1,4 +1,4 @@
-package com.tongyuan.distributeFrame.demo.shiro;
+package com.tongyuan.distributeFrame.demo.shiro.realm;
 
 import com.tongyuan.distributeFrame.demo.entity.User;
 import com.tongyuan.distributeFrame.demo.service.UserExtendService;

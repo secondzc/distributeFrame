@@ -49,11 +49,11 @@ public class LoginController extends BaseController{
         try{
             subject.login(token);
         }catch(IncorrectCredentialsException ice){
-            setErrorResponse("密码错误");
+            return setErrorResponse("密码错误");
         }catch(UnknownAccountException uae){
-            setErrorResponse("未知用户名");
+            return setErrorResponse("未知用户名");
         }catch(ExcessiveAttemptsException eae){
-            setErrorResponse("错误登录过多");
+            return setErrorResponse("错误登录过多");
         }
         User user = userService.queryByUsername(username);
         //登录完成以后，当前用户信息被保存进Session。这个Session是通过Shiro管理的会话对象，要获取依然必须通过Shiro。传统

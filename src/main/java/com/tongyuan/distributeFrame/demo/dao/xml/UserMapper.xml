@@ -16,7 +16,7 @@
         SELECT
         <include refid="baseColumnList"/>
         FROM user
-        WHERE username LIKE concat(#{str,jdbcType=VARCHAR},'%');
+        WHERE username LIKE concat('%',#{str,jdbcType=VARCHAR},'%')
     </select>
 
     <!--<insert id="add" parameterType="com.tongyuan.distributeFrame.demo.entity.User" useGeneratedKeys="true" keyProperty="id">-->
