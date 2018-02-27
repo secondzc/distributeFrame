@@ -4,6 +4,8 @@ import com.tongyuan.distributeFrame.base.BaseController;
 import com.tongyuan.distributeFrame.demo.entity.User;
 import com.tongyuan.distributeFrame.demo.service.UserService;
 import com.tongyuan.distributeFrame.exception.DuplicateNameException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -21,6 +23,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/user")
 public class LoginController extends BaseController{
+     private final Logger logger = LogManager.getLogger();
+
     @Autowired
     private UserService userService;
 
@@ -30,8 +34,10 @@ public class LoginController extends BaseController{
         try{
             userService.insert(user);
         }catch (DuplicateNameException e){
+            logger.info("注册失败");
             return setErrorResponse(e.getMessage());
         }
+        logger.info("{} 注册成功",user);
         return setSuccessResponse("注册成功！");
     }
 
@@ -53,6 +59,7 @@ public class LoginController extends BaseController{
         //登录完成以后，当前用户信息被保存进Session。这个Session是通过Shiro管理的会话对象，要获取依然必须通过Shiro。传统
         // 的Session中不存在User对象。
         subject.getSession().setAttribute("loginUser",user);
+        logger.info("{} 登录成功",user);
         return setSuccessResponse("登录成功");
     }
 
@@ -61,6 +68,7 @@ public class LoginController extends BaseController{
     public Map<String,Object> logout(){
         Subject subject = SecurityUtils.getSubject();
         subject.getSession().removeAttribute("loginUser");
+        logger.info("{} 登出成功",subject.getPrincipal());
         return setSuccessResponse("登出成功");
     }
 
