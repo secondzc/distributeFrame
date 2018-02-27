@@ -11,6 +11,7 @@ public interface Constants {
      String CURRENT_USER  = "CURRENT_USER";
      String EXCPETION_HEAD = "SOME ERRORS OCCURED! AS FOLLOWS :";
      /* 解决按类型缓存和按名缓存键的问题 */
-     Map<Class<?>, String> cacheKeyMap = InstanceUtil.newHashMap();
+     Map<Class<?>, String> CACHE_KEY_MAP = InstanceUtil.newHashMap();
      String ALL_USER_NUMBER = "ALL_USER_NUMBER";
+     String CACHE_NAMESPACE = "CACHE_NAMESPACE";
 }

@@ -1,8 +1,6 @@
 package com.tongyuan.distributeFrame.base;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.github.pagehelper.PageInfo;
 import com.tongyuan.distributeFrame.constant.Constants;
 import com.tongyuan.distributeFrame.util.CacheUtil;
 import com.tongyuan.distributeFrame.util.DataUtil;
@@ -14,9 +12,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by zhangcy on 2018/2/12
@@ -45,7 +40,7 @@ public abstract class BaseServiceImpl<T extends BaseModel> implements BaseServic
 
     private String getCacheKey(){
         Class<?> clz = getClass();
-        String cacheName = Constants.cacheKeyMap.get(clz);
+        String cacheName = Constants.CACHE_KEY_MAP.get(clz);
         if(!DataUtil.isNotEmpty(cacheName)){
             CacheConfig cacheConfig = clz.getAnnotation(CacheConfig.class);
             if (cacheConfig != null && ArrayUtils.isNotEmpty(cacheConfig.cacheNames())) {
@@ -53,7 +48,7 @@ public abstract class BaseServiceImpl<T extends BaseModel> implements BaseServic
             } else {
                 cacheName = getClass().getName();
             }
-            Constants.cacheKeyMap.put(clz, cacheName);
+            Constants.CACHE_KEY_MAP.put(clz, cacheName);
         }
         return cacheName;
     }

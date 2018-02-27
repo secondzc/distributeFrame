@@ -1,7 +1,6 @@
 package com.tongyuan.distributeFrame.util;
 
-import com.tongyuan.distributeFrame.cache.CacheManager;
-import com.tongyuan.distributeFrame.cache.RedisHelper;
+import com.tongyuan.distributeFrame.cache.springRedis.CacheManager;
 
 /**
  * Created by zhangcy on 2018/2/14

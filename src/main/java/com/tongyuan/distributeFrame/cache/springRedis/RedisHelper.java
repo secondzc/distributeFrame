@@ -1,4 +1,4 @@
-package com.tongyuan.distributeFrame.cache;
+package com.tongyuan.distributeFrame.cache.springRedis;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import com.tongyuan.distributeFrame.util.CacheUtil;
 import com.tongyuan.distributeFrame.util.DataUtil;
 import com.tongyuan.distributeFrame.util.InstanceUtil;
 import com.tongyuan.distributeFrame.util.PropertiesUtil;
@@ -33,7 +34,7 @@ public final class RedisHelper implements CacheManager {
         this.redisTemplate = redisTemplate;
         this.keySerializer = (RedisSerializer<String>)redisTemplate.getKeySerializer();
         this.valueSerializer = (RedisSerializer<Object>)redisTemplate.getValueSerializer();
-        //CacheUtil.setCacheManager(this);
+        CacheUtil.setCacheManager(this);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.tongyuan.distributeFrame.cache;
+package com.tongyuan.distributeFrame.cache.springRedis;
 
 import java.io.Serializable;
 import java.util.List;
