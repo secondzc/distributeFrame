@@ -42,9 +42,9 @@ public class LoginController extends BaseController{
     }
 
     @ResponseBody
-    @PostMapping("/login")
-    public Map<String,Object> login(@RequestParam("username")String username,@RequestParam("password")String password){
-        UsernamePasswordToken token = new UsernamePasswordToken(username,password);
+    @GetMapping("/login")
+    public Map<String,Object> login(String username, String password, Boolean rememberme){
+        UsernamePasswordToken token = new UsernamePasswordToken(username,password,rememberme);
         Subject subject = SecurityUtils.getSubject();
         try{
             subject.login(token);
