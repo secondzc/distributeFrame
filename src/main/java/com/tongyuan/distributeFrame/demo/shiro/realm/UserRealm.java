@@ -4,6 +4,7 @@ import com.tongyuan.distributeFrame.demo.entity.User;
 import com.tongyuan.distributeFrame.demo.service.UserExtendService;
 import com.tongyuan.distributeFrame.demo.service.UserService;
 import org.apache.shiro.authc.*;
+import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;

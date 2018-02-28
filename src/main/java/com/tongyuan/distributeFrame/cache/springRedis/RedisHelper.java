@@ -9,9 +9,9 @@ import java.util.concurrent.TimeUnit;
 import com.tongyuan.distributeFrame.util.CacheUtil;
 import com.tongyuan.distributeFrame.util.DataUtil;
 import com.tongyuan.distributeFrame.util.InstanceUtil;
-import com.tongyuan.distributeFrame.util.PropertiesUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisConnectionUtils;
@@ -27,7 +27,8 @@ public final class RedisHelper implements CacheManager {
     private RedisSerializer<Object> valueSerializer;
     private RedisTemplate<Serializable, Serializable> redisTemplate;
     //若用户没有配置，则EXPIRE为空
-    private final Integer EXPIRE = PropertiesUtil.getInt("redis.expiration");
+    @Value("${redis.expiration}")
+    private Integer EXPIRE;
 
     @SuppressWarnings("unchecked")
     public void setRedisTemplate(RedisTemplate<Serializable, Serializable> redisTemplate) {

@@ -19,11 +19,25 @@
         <!--是否在从池中取出连接前进行检验,如果检验失败,则从池中去除连接并尝试取出另一个-->  
         <property name="testOnBorrow" value="${redis.testOnBorrow}" />  
     </bean >
+
+
+	<!--<bean id="jedisPool" class="redis.clients.jedis.JedisPool">-->
+		<!--<constructor-arg index="0" ref="jedisPoolConfig" />-->
+		<!--&lt;!&ndash; 端口，默认6379 &ndash;&gt;-->
+		<!--<constructor-arg index="2" value="6379"  name="port" type="int"/>-->
+		<!--<constructor-arg index="3" value="5000"  name="timeout" type="int"/>-->
+		<!--<constructor-arg index="1" value="127.0.0.1" name="host" type="java.lang.String"/>-->
+		<!--&lt;!&ndash; 如果你需要配置密码，请打开这里。-->
+            <!--<constructor-arg index="4" value="你的密码" name="password" type="java.lang.String"/>-->
+        <!--&ndash;&gt;-->
+	<!--</bean>-->
+
+
 	<!-- redisCluster配置 -->
 	<!-- <bean id="redisClusterConfiguration" class="org.springframework.data.redis.connection.RedisClusterConfiguration">
 		<constructor-arg name="propertySource">
         	<bean id="resourcePropertySource" class="org.springframework.core.io.support.ResourcePropertySource"
-		        c:name="redis.properties" c:resource="classpath*:config/system.properties"/>
+		        c:name="redis.properties" c:resource="classpath*:config/application.properties"/>
 		    </bean>
 		</constructor-arg>
 	</bean>
@@ -55,4 +69,5 @@
 		<property name="transactionAware" value="true" />
 		<property name="defaultExpiration" value="${redis.expiration}" />
 	</bean>
+
 </beans>

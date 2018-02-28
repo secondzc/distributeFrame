@@ -13,5 +13,5 @@ public interface Constants {
      /* 解决按类型缓存和按名缓存键的问题 */
      Map<Class<?>, String> CACHE_KEY_MAP = InstanceUtil.newHashMap();
      String ALL_USER_NUMBER = "ALL_USER_NUMBER";
-     String CACHE_NAMESPACE = "CACHE_NAMESPACE";
+     String CACHE_NAMESPACE = "CACHE_NAMESPACE:";
 }

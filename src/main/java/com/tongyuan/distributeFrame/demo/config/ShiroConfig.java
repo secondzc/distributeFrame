@@ -1,8 +1,13 @@
 package com.tongyuan.distributeFrame.demo.config;
 
+
 import com.tongyuan.distributeFrame.demo.shiro.listener.CustomSessionListener;
 import com.tongyuan.distributeFrame.cache.shiro.RedisCacheManager;
+import com.tongyuan.distributeFrame.demo.shiro.matcher.RetryLimitHashedCredentialsMatcher;
 import com.tongyuan.distributeFrame.demo.shiro.realm.UserRealm;
+import org.apache.shiro.authc.credential.CredentialsMatcher;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.SessionListener;
 import org.apache.shiro.session.mgt.SessionManager;
@@ -24,9 +29,9 @@ public class ShiroConfig {
     public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         // 设置realm.
-        securityManager.setRealm(UserRealm());
+        securityManager.setRealm(userRealm());
         // 自定义缓存实现 使用redis
-        securityManager.setCacheManager(new RedisCacheManager());
+        securityManager.setCacheManager(cacheManager());
         // 自定义session管理 使用redis
         securityManager.setSessionManager(sessionManager());
 //        //注入记住我管理器;
@@ -35,8 +40,15 @@ public class ShiroConfig {
     }
 
     @Bean
-    public UserRealm UserRealm(){
+    public CacheManager cacheManager(){
+        CacheManager cacheManager = new RedisCacheManager();
+        return cacheManager;
+    }
+
+    @Bean
+    public UserRealm userRealm(){
         UserRealm userRealm = new UserRealm();
+        userRealm.setCredentialsMatcher(credentialsMatcher());
         return userRealm;
     }
 
@@ -71,4 +83,15 @@ public class ShiroConfig {
         sessionManager.setGlobalSessionTimeout(1800000);
         return sessionManager;
     }
+
+    /*
+    注入自定义凭证匹配器
+     */
+    @Bean
+    public CredentialsMatcher credentialsMatcher(){
+        CacheManager cacheManager = cacheManager();
+        RetryLimitHashedCredentialsMatcher matcher = new RetryLimitHashedCredentialsMatcher(cacheManager);
+        return matcher;
+    }
+
 }

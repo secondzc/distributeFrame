@@ -17,7 +17,8 @@ public class RedisCacheManager implements CacheManager{
     public <K, V> Cache<K, V> getCache(String name) throws CacheException {
         Cache cache = caches.get(name);
         if(cache == null){
-            caches.put(name,new RedisCache());
+            cache = new RedisCache();
+            caches.put(name,cache);
         }
         return cache;
     }
