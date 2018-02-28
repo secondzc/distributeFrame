@@ -1,6 +1,7 @@
 package com.tongyuan.distributeFrame.demo.config;
 
 
+import com.tongyuan.distributeFrame.demo.shiro.filter.OnlineLimitFilter;
 import com.tongyuan.distributeFrame.demo.shiro.listener.CustomSessionListener;
 import com.tongyuan.distributeFrame.cache.shiro.RedisCacheManager;
 import com.tongyuan.distributeFrame.demo.shiro.matcher.RetryLimitHashedCredentialsMatcher;
@@ -20,8 +21,11 @@ import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by zhangcy on 2018/2/27
@@ -56,24 +60,6 @@ public class ShiroConfig {
         return userRealm;
     }
 
-    /**
-     * ShiroFilterFactoryBean 处理拦截资源文件问题。
-     * 注意：单独一个ShiroFilterFactoryBean配置是或报错的，以为在
-     * 初始化ShiroFilterFactoryBean的时候需要注入：SecurityManager
-     *
-     * Filter Chain定义说明 1、一个URL可以配置多个Filter，使用逗号分隔 2、当设置多个过滤器时，全部验证通过，才视为通过
-     * 3、部分过滤器可指定参数，如perms，roles
-     *
-     */
-    @Bean
-    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
-        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-
-        // 必须设置 SecurityManager
-        shiroFilterFactoryBean.setSecurityManager(securityManager);
-
-        return shiroFilterFactoryBean;
-    }
 
     @Bean
     public SessionManager sessionManager(){
@@ -119,5 +105,39 @@ public class ShiroConfig {
         //rememberMe cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度(128 256 512 位)
         cookieRememberMeManager.setCipherKey(Base64.decode("3AvVhmFLUs0KTA3Kprsdag=="));
         return cookieRememberMeManager;
+    }
+
+
+    /**
+     * 限制同一账号登录同时登录人数控制
+     */
+    public OnlineLimitFilter onlineLimitFilter(){
+        OnlineLimitFilter filter = new OnlineLimitFilter(cacheManager());
+        filter.setKickoutAfter(false);
+        filter.setMaxSession(1);
+        return filter;
+    }
+    /**
+     * ShiroFilterFactoryBean 处理拦截资源文件问题。
+     * 注意：单独一个ShiroFilterFactoryBean配置是或报错的，以为在
+     * 初始化ShiroFilterFactoryBean的时候需要注入：SecurityManager
+     *
+     * Filter Chain定义说明 1、一个URL可以配置多个Filter，使用逗号分隔 2、当设置多个过滤器时，全部验证通过，才视为通过
+     * 3、部分过滤器可指定参数，如perms，roles
+     *
+     */
+    @Bean
+    public ShiroFilterFactoryBean shiroFilter() {
+        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+        // 必须设置 SecurityManager
+        shiroFilterFactoryBean.setSecurityManager(securityManager());
+
+        //自定义拦截器
+        Map<String, Filter> filtersMap = new LinkedHashMap<String, Filter>();
+        //限制同一帐号同时在线的个数。
+        filtersMap.put("kickout", onlineLimitFilter());
+        shiroFilterFactoryBean.setFilters(filtersMap);
+
+        return shiroFilterFactoryBean;
     }
 }

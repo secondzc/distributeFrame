@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
+import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.util.CollectionUtils;
 
 import java.io.Serializable;
@@ -20,6 +21,14 @@ public class RedisCache<K,V> implements Cache<K,V>{
 
     private static final String keyPrefix = Constants.CACHE_NAMESPACE + "shiro_redis_session:";
 
+    //单位：秒
+    public void setExpire(K key , Integer expire) {
+        CacheUtil.getCacheManager().expire(getKey(key),expire);
+    }
+
+    public Long ttl(K key){
+        return CacheUtil.getCacheManager().ttl(getKey(key));
+    }
 
     private String getKey(K key){
         return keyPrefix + key;
