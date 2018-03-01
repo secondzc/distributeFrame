@@ -110,6 +110,13 @@
             <version>1.0.1</version>
         </dependency>
 
+        <!--quartz-->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.2.3</version>
+        </dependency>
+
         <!--demo使用的依赖，发布框架时删除-->
         <!-- 使用数据源 -->
         <dependency>

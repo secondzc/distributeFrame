@@ -3,6 +3,7 @@ package com.tongyuan.distributeFrame.demo.service.impl;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.tongyuan.distributeFrame.cache.shiro.RedisCache;
 import com.tongyuan.distributeFrame.demo.entity.User;
+import com.tongyuan.distributeFrame.demo.service.JobService;
 import com.tongyuan.distributeFrame.demo.service.UserService;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
@@ -43,5 +44,6 @@ public class UserServiceImplTest {
         redisCache.setExpire("zz",300);
         System.out.println("更改后" + redisCache.ttl("zz"));
     }
+
 
 }
