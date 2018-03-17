@@ -5,7 +5,7 @@
 
 经过测试，@RequestBody适用于application/json,如果前端json的键和service层要求的键一致不需要转化的话，能很大地减少controller层的工作量。
 
-ibase4j中，应该是common和两个facade是每台服务器都有的，然后web和service共有4个，分别部署在四台服务器（集群）中。
-
 ibase4j中，在resource/spring/redis.xml中有setRedisCacheManager方法，RedisHelper的setRedisCacheManager（）方法调用了
 CacheUtil.setCacheManager()方法，所以在代码中能用到CacheUtil.getCache。
+
+todo:还要加入分布式session管理和aop的功能。

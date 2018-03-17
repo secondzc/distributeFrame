@@ -4,24 +4,23 @@ import com.tongyuan.distributeFrame.demo.entity.User;
 import com.tongyuan.distributeFrame.demo.service.UserExtendService;
 import com.tongyuan.distributeFrame.demo.service.UserService;
 import org.apache.shiro.authc.*;
-import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
 import java.util.Set;
 
 /**
  * Created by zhangcy on 2018/2/26
  */
 public class UserRealm extends AuthorizingRealm {
-    @Autowired
-    private UserService userService;
+
     @Autowired
     private UserExtendService userExtendService;
+    @Autowired
+    private UserService userService;
 
     /*
     返回权限信息

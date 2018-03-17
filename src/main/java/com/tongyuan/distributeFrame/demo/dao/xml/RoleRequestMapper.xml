@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tongyuan.distributeFrame.demo.dao.RoleRequestMapper">
+    <resultMap id="baseResultMap" type="com.tongyuan.distributeFrame.demo.entity.RoleRequest">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="role_id" property="roleId" jdbcType="BIGINT"/>
+        <result column="request_id" property="requestId" jdbcType="BIGINT"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="baseColumnList">
+        id,role_id,request_id,status
+    </sql>
+
+    <update id="setAgree">
+        UPDATE role_request
+        SET status = 'agree'
+        WHERE request_id = #{requestId,jdbcType=BIGINT}
+        AND role_id = #{roleId,jdbcType=BIGINT}
+    </update>
+
+    <update id="setDisAgree">
+        UPDATE role_request
+        SET status = 'disagree'
+        WHERE request_id = #{requestId,jdbcType=BIGINT}
+        AND role_id = #{roleId,jdbcType=BIGINT}
+    </update>
+
+    <update id="setActive">
+        UPDATE role_request
+        SET status = 'active'
+        WHERE request_id = #{requestId,jdbcType=BIGINT}
+        AND role_id = #{roleId,jdbcType=BIGINT}
+    </update>
+
+</mapper>
